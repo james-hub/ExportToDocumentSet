@@ -1,0 +1,11 @@
+body   { color: #696969; font-style: normal; font-weight: normal; font-size: 13px; line-height: 13px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular; text-decoration: none; background-color: #f5f5f5 }
+td { color: #696969; font-style: normal; font-weight: normal; font-size: 13px; line-height: 13px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular; background-color: #f5f5f5 }
+a { color: #000; font-style: normal; font-weight: normal; font-size: 13px; line-height: 13px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular }
+a:link { color: #000; font-style: normal; font-weight: normal; font-size: 13px; line-height: 13px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular }
+a:visited { color: #8b0000; font-style: italic; font-weight: normal; font-size: 13px; line-height: 13px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular }
+a:hover { color: #ff4500; font-style: normal; font-weight: normal; font-size: 13px; line-height: 13px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular }
+a:active { color: #8b0000; font-style: normal; font-weight: normal; font-size: 13px; line-height: 13px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular }
+.mtitle { color: black; font-style: normal; font-weight: bold; font-size: 14px; line-height: 14px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular; text-decoration: none }
+.msubtitle  { color: navy; font-style: italic; font-weight: normal; font-size: 13px; line-height: 13px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular; text-decoration: none }
+.msignature  { color: gray; font-style: italic; font-weight: normal; font-size: 11px; line-height: 11px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular }
+.mtext  { color: #cd5c5c; font-style: normal; font-weight: normal; font-size: 13px; line-height: 13px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular; text-decoration: none }
