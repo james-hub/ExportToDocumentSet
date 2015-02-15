@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+<meta http-equiv="Content-Language" content="de-ch"/>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0"/>
+<meta name="ProgId" content="FrontPage.Editor.Document"/>
+<title>Export Data to Documents Set with PHP (ExportToDocSet)</title>
+<link rel="shortcut icon" href="http://www.fastproject.ch/images/favicon.ico"/>
+</head>
+
+<body>
+
+<table border="0" width="100%">
+  <tr>
+    <td width="100%"><font face="Arial" size="1">The ExportToDocumentSet is a set of different PHP 5 classes which handles the export of data delivered from MySql database tables. Mainly the Visitor Design Pattern, a Debugger Class (handles all the sql database queries) and the DOM Class are reponsible for the fluent sequence of events. Microsofts Excel and Microsofts Word and Apaches Open Office text documents and table documents are also supported and can also be used as online printing facility (incl.letters in series). The necessary templates for docs and odts are easy to 'create and use': First you create your page design with your preferred Word or Open Office with specified placeholders (which are all optional) and then you safe the file as *.htm or *.html - the rest is done by the responsible class. Extra: Using Excel Files from Microsoft Excel or Table Documents from Open Office the field width will be recognized while creating the file. In total seven file types are supported: xml, csv, xls, ods, doc, odt and rtf. (see screenshots <a href="#screenshot">below</a>). The setting of the ExportToDocumentSet should work for PHP 5, MySqli, Apache 2, IIS, Windows, Unix or Linux.<br/>
+					</font>
+					<p><font face="Arial" size="1">The scripts snippets you see here (the complete script is <a href="#load">downloadable</a>)&nbsp;is only a small part of the complete application. That's it. All stuff is all prepared for your convenience (example and class-files included). <i>Best regards Claudio Biesele</i></font></p>
+				</td>
+  </tr>
+  <tr>
+    <td width="100%">
+      <hr/>
+		<p><font face="Arial" size="1"><b>Part of the DebugVisitor Code:</b></font></p>
+					<p><font size="1" color="blue" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">public function getFieldsFromOODBTable($tbname) {<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;$this->tbname = $tbname;<br/>
+    					&nbsp;&nbsp;&nbsp;&nbsp;$i = '1';<br/>
+    	
+						&nbsp;&nbsp;&nbsp;&nbsp;// prepare field names<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;$this->fields = $this->getTableFields($this->tbname);<br/>
+
+    					&nbsp;&nbsp;&nbsp;&nbsp;while ($this->row = $this->fields->fetch_assoc()) {<br/>
+    						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$field = ucfirst($this->row['Field']);<br/>
+    		
+    						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->doccol = $this->docos->createElement('table:table-column');<br/>
+    						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->doccol->setAttribute('table:style-name',"co{$i}");<br/>
+    						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->doccol->setAttribute('table:default-cell-style-name',"Default");<br/>
+    						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->doctable->appendChild($this->doccol);<br/><br/>	
+    		
+    						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->doccell = $this->docos->createElement('table:table-cell');<br/>
+    						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->doccell->setAttribute('table:style-name',"ce1");<br/>
+    						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->doccell->setAttribute('office:value-type',"string");<br/><br/>   		
+    		
+    						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->doctext = $this->docos->createElement('text:p');<br/>
+    						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->doctext_val = $this->docos->createTextNode($field);<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->doctext->appendChild($this->doctext_val);<br/><br/>
+			
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->doccell->appendChild($this->doctext);<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->docrowheader->appendChild($this->doccell);<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$i++;<br/>
+    	&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+	}</font></p>
+				</td>
+  </tr>
+			<tr>
+    <td width="100%">
+      <hr/>
+					<p><font face="Arial" size="1"><b>Part of the ExportExcelVisitor Code:</b></font></p>
+					<p><font size="1" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">public function setNewNumberFormat() {<br/>
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->setNewStyleNumberFormat();<br/>
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->root->appendChild($this->stylenumberformat);<br/><br/>
+    	
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->newinteformat = $this->docxls->createElement('Interior');<br/>
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->newinteformat->setAttribute('ss:Color',"#C0C0C0");<br/>
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->newinteformat->setAttribute('ss:Pattern',"Solid");<br/><br/>
+    	
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->newnumberformat = $this->docxls->createElement('NumberFormat');<br/>
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->newnumberformat->setAttribute('ss:Format',"0");<br/><br/>
+    	
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->stylenumberformat->appendChild($this->newinteformat);<br/>	
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->stylenumberformat->appendChild($this->newnumberformat);<br/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->docstylexls->appendChild($this->stylenumberformat);<br/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->root->appendChild($this->docstylexls);<br/>		
+   		 	}<br/></font></p>
+				</td>
+  </tr>
+			<tr>
+    <td width="100%">
+      <hr/><a name="screenshot"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="100%"><img border="0" src="images/xml_example.jpg" width="240" height="252" alt=""/></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial" size="1">XML file after created by ExportFleXmlVisitor Class.</font></td>
+  </tr>
+  <tr>
+    <td width="100%"><img border="0" src="images/csv_example.jpg" width="539" height="252" alt=""/></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial" size="1">CSV file after created by ExportCSVisitor Class.</font></td>
+  </tr>
+  <tr>
+    <td width="100%"><img border="0" src="images/xls_example.jpg" width="683" height="252" alt=""/></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial" size="1">Excel file after created by ExportExcelVisitor Class.</font></td>
+  </tr>
+  <tr>
+    <td width="100%"><img border="0" src="images/ods_example.jpg" width="778" height="252" alt=""/></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial" size="1">Apache Open Office ods file after created by ExportOOVisitor Class.</font></td>
+  </tr>
+  <tr>
+    <td width="100%"><img border="0" src="images/doc_example.jpg" width="361" height="252" alt=""/></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial" size="1">Microsoft Word doc file after created by ExportDocVisitor Class.</font></td>
+  </tr>
+  <tr>
+    <td width="100%"><img border="0" src="images/odt_example.jpg" width="367" height="252" alt=""/></td>
+  </tr>
+  <tr>
+    <td width="100%"><font face="Arial" size="1">Apache Open Office odt file after created by ExportOdtVisitor Class.</font></td>
+  </tr>
+			<tr>
+				<td width="100%"></td>
+			</tr>
+			<tr>
+    <td width="100%"><font face="Arial" size="1">Download the full script at <a href="http://www.fastproject.ch/ExportToDocSet/ExportToDocSet.rar#load" target="_blank">www.fastproject.ch</a>. The downloaded script is free from Copyright restrictions, Zurich, 07th of October 2012.<a name="load"></a></font></td>
+  </tr>
+		</table>
+
+</body>
+
+</html>

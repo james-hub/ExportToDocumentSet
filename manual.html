@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<meta name="description" content="FAST!project - Manual Export to Documents Set with PHP">
+		<meta name="keywords" content="PHP, PHP 5, export to document, manual">
+		<title>ExportToDocumentSet Manual</title>
+		<link href="css/createdocs.css" rel="stylesheet" media="screen" type="text/css">
+		<link rel="shortcut icon" href="http://www.fastproject.ch/images/favicon.ico"/>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<p><span class="mtitle">Manual for ExportToDocumentSet<a name="up"></a></span></p>
+		<p>(<a href="#xml">Exportt Flex XML Visitor</a> | <a href="#csv">Export CSV Visitor</a> | <a href="#excel">Export Microsoft Excel Visitor</a> | <a href="#ods">Export Apache Open Office Ods Visitor</a> | <a href="#doc">Export Microsoft Word Doc/Rtf Visitor</a> | <a href="#odt">Export Apache Open Office Odt/Rtf Visitor</a> |</p>
+		<p>&nbsp;</p>
+		<p><span class="msubtitle">Export Flex XML Visitor:<a name="xml"></a> / <a href="#up">up</a></span><br>
+		</p>
+		<p><span class="mtext">The Visitor Class ExportFleXmlVisitor allows you to create Xml files stuffed with data from MySql database tables (add, update or replace). Find all created files in directory named docs.</span><br>
+		</p>
+		<p>Please regard the following variables:<br>
+		</p>
+		<p>$att   = 'type'; // add on for attribute name (for example =&gt;tablename)<br>
+			$recordid = 'id'; // auto increment field name of database table<br>
+			$tablename = &quot;tb_orders&quot;; // table name<br>
+			$xmlfile  = 'orders.xml'; // xml file name<br>
+			$replaceid  = '0'; // 0 = do not replace xml file / 1 = do replace xml file<br>
+			<br>
+		</p>
+		<p><span class="msubtitle">Export CSV Visitor:<a name="csv"></a> / <a href="#up">up</a></span><br>
+		</p>
+		<p><span class="mtext">This Classes allow you to create, complement and read CSV files stuffed with data from MySql database tables. Find all created files in directory named docs.</span><br>
+		</p>
+		<p>=&gt; Create csv file (ExportCSVisitor):<br>
+		</p>
+		<p>Please regard the following variables:<br>
+		</p>
+		<p>$setdate  = null;<br>
+			$felement  = 'orders'; // csv file name<br>
+			$id   = '1'; // document id for naming file option (with id = 0 date will be used instead)<br>
+		</p>
+		<p>=&gt; Read csv file (ReadFiles):<br>
+		</p>
+		<p>Please regard the following variables:<br>
+		</p>
+		<p>$id = '0'; // document wll have date for naming file option<br>
+			$setdate = date('Y-m-d'); // use date to find and read csv file<br>
+		</p>
+		<p>=&gt; Add more records to csv file (ProcessFiles):<br>
+			Use this feature only if you want to add more data to csv file<br>
+			<br>
+		</p>
+		<p><span class="msubtitle">Export Microsoft Excel Visitor:<a name="excel"></a> / <a href="#up">up</a></span><br>
+		</p>
+		<p><span class="mtext">The Visitor Class ExportExcelVisitor allows you to create Microsoft Excel files (.xls) stuffed with data from MySql database tables. Column width and color will be set automatically, corresponding to table field type and content length (supported formats are: int, float, varchar, date, datetime, text). Find all created files in directory named docs.</span><br>
+		</p>
+		<p>Please regard the following variables:<br>
+		</p>
+		<p>$felement = 'report'; // excel worksheet name<br>
+			$id = '0'; // document id for naming file option (with id = 0 date will be used instead)<br>
+			$myname = 'Firstname Lastname';<br>
+			$compname = 'MyCompany';<br>
+			$tbname	= 'tb_orders'; // database table name<br>
+			<br>
+		</p>
+		<p><span class="msubtitle">Export Apache Open Office Ods Visitor:<a name="ods"></a> / <a href="#up">up</a></span><br>
+		</p>
+		<p><span class="mtext">The Visitor Class ExportOOVisitor allows you to create Apache Open Office table documents (.ods) stuffed with data from MySql database tables. Column width and color will be set automatically, corresponding to table field type and content length (supported formats are: int, float, varchar, date, datetime, text). Show file with ... or save file as ... in your preferred directory</span>.<br>
+		</p>
+		<p>Please regard the following variables:<br>
+		</p>
+		<p>$felement = 'report'; // open office document name<br>
+			$id = '0'; // document id for naming file option (with id = 0 date will be used instead)<br>
+			$tbname = 'tb_orders'; // database table name<br>
+			<br>
+		</p>
+		<p><span class="msubtitle">Export Microsoft Word Doc/Rtf Visitor:<a name="doc"></a> / <a href="#up">up</a></span><br>
+		</p>
+		<p><span class="mtext">The Class ExportDocVisitor allows you to create (single/series) Microsoft Word documents (.doc/.rtf) stuffed with data from MySql database tables. First you create your page design with the placeholders (which are all optional).</span><br>
+		</p>
+		<p>&quot;xsender&quot; = your sender address,<br>
+			&quot;xurl&quot; = your url,<br>
+			&quot;xdate&quot; = city and sending date,<br>
+			&quot;xaddress&quot; = receiver address,<br>
+			&quot;xemail&quot; = your email,<br>
+			&quot;xconcerns&quot; = message subject,<br>
+			&quot;xdear&quot; = to whom it may concern,<br>
+			&quot;xcontent&quot; = content of message,<br>
+			&quot;xsalutation&quot; = best regards,<br>
+			&quot;xownname&quot; = your first and last name,<br>
+			&quot;xattachments&quot; = name attachments;<br>
+		</p>
+		<p><span class="mtext">Safe it as xxx.htm(filtered) or xxx.html(filtered). Place html file and pictures (if there are =&gt; don't manipulate directory!) in the directors templates. That's it. If you want to use this feature online (print .doc online), you have adjust the classes/DebugVisitor.class.php (line 758). Find all created files in directory named docs.</span>.<br>
+		</p>
+		<p>Please regard the following variables:<br>
+		</p>
+		<p>$tbname = &quot;tb_letters&quot;; // table name<br>
+			$template = 'xxx'; // doc template name<br>
+			$id = '0'; // 0 = all records / not 0 = specific record(s) for example '1' or '1,5,6' / x = serial letter<br>
+			$filend = &quot;.doc&quot;; // alternative option .rtf<br>
+			<br>
+		</p>
+		<p><span class="msubtitle">Export Apache Open Office Odt/Rtf Visitor:<a name="odt"></a> / <a href="#up">up</a></span><br>
+		</p>
+		<p><span class="mtext">The Class ExportOdtVisitor allows you to create (single/series) Apache Open Office documents (.odt/.rtf) stuffed with data from MySql database tables. First you create your page design with the placeholders (which are all optional)</span>.<br>
+		</p>
+		<p>&quot;xsender&quot; = your sender address,<br>
+			&quot;xurl&quot; = your url,<br>
+			&quot;xdate&quot; = city and sending date,<br>
+			&quot;xaddress&quot; = receiver address,<br>
+			&quot;xemail&quot; = your email,<br>
+			&quot;xconcerns&quot; = message subject,<br>
+			&quot;xdear&quot; = to whom it may concern,<br>
+			&quot;xcontent&quot; = content of message,<br>
+			&quot;xsalutation&quot; = best regards,<br>
+			&quot;xownname&quot; = your first and last name,<br>
+			&quot;xattachments&quot; = name attachments.<br>
+		</p>
+		<p><span class="mtext">Safe file as xxx.htm or xxx.html. Place html file and pictures (if there are =&gt; set path to images directory manually!). That's it. If you want to use this feature online (print .odt online), you have adjust the classes/DebugVisitor.class.php (line 888). Find all created files in directory named docs.</span><br>
+		</p>
+		<p>in the directors templates. That's it.<br>
+		</p>
+		<p>Please regard the following variables:<br>
+		</p>
+		<p>$tbname  = &quot;tb_letters&quot;; // table name<br>
+			$template  = 'xxx'; // odt template name<br>
+			$id   = '0'; // 0 = all records / not 0 = specific record(s)  for example '1' or '1,5,6' / x = serial letter<br>
+			$filend  = &quot;.odt&quot;; // alternative option .rtf<br>
+			<br>
+		</p>
+		<p><span class="msignature">Created: by FAST!project, Claudio Biesele, Zurich, 07th of October 2012</span></p>
+	</body>
+
+</html>
